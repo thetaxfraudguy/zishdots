@@ -1,0 +1,2 @@
+# zishdots
+Zsh dotfiles
