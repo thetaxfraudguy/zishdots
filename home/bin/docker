@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+DOCKER_CMD="/usr/local/bin/docker"
+
+_docker_start () {
+  if ! $DOCKER_CMD info >/dev/null 2>&1; then
+    open -g -j -a Docker.app
+    while ! $DOCKER_CMD stats --no-stream >/dev/null 2>&1
+    do
+      echo -n .
+      sleep 1
+    done
+  fi
+}
+
+case "$1" in
+  exit)
+    pkill Docker
+    ;;
+  prune)
+    _docker_start
+    exec $DOCKER_CMD system prune --volumes -fa
+    ;;
+  *)
+    _docker_start
+    exec $DOCKER_CMD "$@"
+esac

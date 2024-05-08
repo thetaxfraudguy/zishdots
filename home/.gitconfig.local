@@ -1,0 +1,17 @@
+[alias]
+    co = checkout
+    b = branch
+    lg = log --pretty=format:%h
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+[grep]
+    extendRegexp = true
+    lineNumber = true
+[push]
+    default = simple
