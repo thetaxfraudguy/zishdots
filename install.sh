@@ -2,11 +2,19 @@
 
 DOTFILES="$HOME/.dotfiles"
 
-header () 
+header() {
   echo -e "\t\033[0;32m[OK]\033[0m $1"
 }
 
-warn () {
+error() {
+  echo -e "\t\033[0;31m[ERROR]\033[0m $1"
+}
+
+success() {
+  echo -e "\t\033[0;32m[OK]\033[0m $1"
+}
+
+warn() {
   echo -e "\t\033[0;33m[WARN]\033[0m $1"
 }
 
@@ -23,7 +31,7 @@ mise_plugins=(
 
 if command -v mise >/dev/null 2>&1; then
   for plugin in "${mise_plugins[@]}"; do
-    mise plugins install "$plugin" > /dev/null
+    mise plugins install "$plugin" >/dev/null
     success "$plugin"
   done
 else
