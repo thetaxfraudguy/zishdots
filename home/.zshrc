@@ -58,7 +58,7 @@ gdl () { git fetch -p && for branch in $(git for-each-ref --format '%(refname) %
 # Golang
 export GOPATH="$HOME/Projects/Go"
 export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-export GOPRIVATE="github.com/huntresslabs"
+
 # Mise-en-place
 eval "$($HOMEBREW_PREFIX/bin/mise activate zsh)"
 
