@@ -2,6 +2,10 @@
     co = checkout
     b = branch
     lg = log --pretty=format:%h
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+
 [color]
     diff = auto
     status = auto

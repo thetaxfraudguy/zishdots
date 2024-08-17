@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 .vscode/
+.tool-versions
 
 *__pycache__/
 *.py[cod]
