@@ -2,15 +2,7 @@
 
 DOTFILES="$HOME/.dotfiles"
 
-header () {
-  echo -e "\033[0;35m[DOTFILES]\033[0m - \033[0;34m$1\033[0m"
-}
-
-error () {
-  echo -e "\t\033[0;31m[ERROR]\033[0m $1"
-}
-
-success () {
+header () 
   echo -e "\t\033[0;32m[OK]\033[0m $1"
 }
 
@@ -22,21 +14,20 @@ header "Installing brew packages"
 brew bundle install --file="${DOTFILES}/Brewfile"
 test -f "$HOME/Brewfile" && brew bundle install
 
-header "Installing ASDF plugins"
-asdf_plugins=(
+header "Installing mise plugins"
+mise_plugins=(
   "packer"
   "terraform"
-  "golang"
-  "python"
-  "nodejs"
+  "ansible-base"
 )
-if command -v asdf >/dev/null 2>&1; then
-  for plugin in "${asdf_plugins[@]}"; do
-    asdf plugin-add "$plugin" > /dev/null
+
+if command -v mise >/dev/null 2>&1; then
+  for plugin in "${mise_plugins[@]}"; do
+    mise plugins install "$plugin" > /dev/null
     success "$plugin"
   done
 else
-  warn "asdf not found, skipping plugin installation..."
+  warn "mise not found, skipping plugin installation..."
 fi
 
 header "Configuring git"

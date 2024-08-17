@@ -10,17 +10,18 @@ export SAVEHIST=10000
 export HISTFILE=$HOME/.zsh_history
 export HIST_STAMPS="yyyy-mm-dd"
 
+bindkey '\e[A' history-search-backward
+bindkey '\e[B' history-search-forward
+
 setopt HIST_SAVE_NO_DUPS
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' menu select
 
 alias ls="ls -A --color=auto"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
-
-# ASDF
-. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 
 #AWS
 export AWS_PAGER=
@@ -45,6 +46,8 @@ alias g="git"
 alias gco="git checkout"
 alias gcob="git checkout -b"
 alias gl="git log"
+alias gpl="git pull"
+alias gps="git push"
 
 gdl () { git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done; }
 
@@ -55,8 +58,9 @@ gdl () { git fetch -p && for branch in $(git for-each-ref --format '%(refname) %
 # Golang
 export GOPATH="$HOME/Projects/Go"
 export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-
-. $HOME/.asdf/plugins/golang/set-env.zsh
+export GOPRIVATE="github.com/huntresslabs"
+# Mise-en-place
+eval "$($HOMEBREW_PREFIX/bin/mise activate zsh)"
 
 #Postgres
 export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
